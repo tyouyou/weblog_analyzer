@@ -71,3 +71,8 @@ user_count = df['identity'].unique()
 # Reference: 
 # 1. アクセスログデータの前処理、ユーザIDとセッションの生成、URLの集約 (https://www.marketechlabo.com/access-log-data-preparation/)
 
+# OTHER
+# binary to shift-jis
+b = b'\x82h'
+s = b.decode('shift-jis')
+print(s)
