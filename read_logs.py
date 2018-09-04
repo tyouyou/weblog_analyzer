@@ -19,8 +19,7 @@ for index, row in data.iterrows():
         dic[row['user']] = [row.tolist()]
 
 # sorted list to session dictionary
-def li_to_dic(li):
-    sess_no = 0
+def li_to_dic(li, sess_no):
     sess_dic = {}
     sess_dic[sess_no] = [li[0]]
     for i in range(1, len(li)):
@@ -31,21 +30,31 @@ def li_to_dic(li):
             print(sess_no)
             print(sess_dic[sess_no])
             sess_dic[sess_no].append(li[i])
-    return sess_dic
+    sess_no = sess_no + 1
+    return sess_dic, sess_no
 
 # sort list in dictionary by timestamp
 for k, v in dic.items():
     v.sort(key = lambda row: row[6])
 
 # divide session by timestamp in same user dictionary
-dic_sess = {}
-for k,v in dic.items(): 
-    dic_sess[k] = li_to_dic(dic[k])
+def div_dic_by_sess(dic):
+    dic_sess = {}
+    sess_no = 0
+    for k,v in dic.items(): 
+        dic_sess[k], sess_no = li_to_dic(dic[k], sess_no)
+    return dic_sess
 
+dic_sess = div_dic_by_sess(dic)
 pprint.pprint(dic_sess)
 
+def count_session_in_dic(dic):
+    count = 0
+    for k,v in dic.items():
+        count = count + len(v)
+    return count
 
-
+print(count_session_in_dic(dic_sess))
 
 
 
