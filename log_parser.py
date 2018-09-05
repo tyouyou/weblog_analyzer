@@ -79,3 +79,4 @@ logs.to_csv('./output_access_log.csv', sep=',', encoding='shift-jis')
 # b = b'\x82h'
 # s = b.decode('shift-jis')
 # print(s)
+
